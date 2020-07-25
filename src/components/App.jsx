@@ -1,6 +1,7 @@
 import React from 'react'
 import NavigateBar from './NavigateBar';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "../../node_modules/bootstrap/dist/css/bootstrap.css";
 
 const App = () => {
   return (

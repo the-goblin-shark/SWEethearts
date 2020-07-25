@@ -43,7 +43,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.5.0",
     "express": "^4.17.1",
     "popper.js": "^1.16.1",
     "postcss-loader": "^3.0.0",

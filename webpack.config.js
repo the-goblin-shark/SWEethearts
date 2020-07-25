@@ -17,9 +17,17 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s?[ac]ss$/i,
-        exclude: /node_modules/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.css$/,
+        use: [
+          // 2. Inject CSS into the DOM
+          {
+            loader: "style-loader",
+          },
+          // 1. Convert CSS to CommonJS
+          {
+            loader: "css-loader",
+          },
+        ],
       },
       {
         test: /\.ts(x)?$/,
