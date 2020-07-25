@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import App from './components/App';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // uncomment so that webpack can bundle styles
 // import styles from './scss/application.scss';
