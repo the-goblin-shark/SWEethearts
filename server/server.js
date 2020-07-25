@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-
+const bcrypt = require('bcrypt');
 const PORT = 3000;
 
 /*
@@ -16,7 +16,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
  * Start server
  */
 app.listen(PORT, () => {
-  console.log(`Server listening on port: ${PORT}`);
+	console.log(`Server listening on port: ${PORT}`);
 });
 
 module.exports = app;

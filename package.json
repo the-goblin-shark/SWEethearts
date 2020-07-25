@@ -43,6 +43,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
+    "cookie": "^0.4.1",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
