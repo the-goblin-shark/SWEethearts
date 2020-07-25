@@ -5,7 +5,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
-const flash = require('express-flash');
+const model = require('./Models/model');
+require('dotenv').config();
 const PORT = 3000;
 
 /*
@@ -21,7 +22,24 @@ app.use(
 		saveUninitialized: false,
 	})
 );
-app.use(flash());
+console.log('process.env.elephantURI', process.env.elephantURI);
+app.post('/api/signup', async (req, res) => {
+	const { username, password } = req.body;
+
+	const hashedPassWord = await bcrypt.hash(password, 10);
+
+	model.query(
+		`INSERT INTO User_credentials (username,password) VALUES ($1,$2)
+					`,
+		[username, password],
+		(err, result) => {
+			if (err) {
+				console.log(err);
+			}
+			res.send('success');
+		}
+	);
+});
 
 /*
  * Start server
