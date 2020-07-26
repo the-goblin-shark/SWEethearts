@@ -95,7 +95,7 @@ ideaController.getOneIdea = (req, res, next) => {
     if (err) {
       console.log(err);
       return next({
-        log: `error occurred at submitIdea middleware. error message is: ${err}`,
+        log: `error occurred at getOneIdea middleware. error message is: ${err}`,
         status: 400,
         message: { err: 'An error occurred' },
       });

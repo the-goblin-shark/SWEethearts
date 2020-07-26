@@ -4,11 +4,11 @@ const model = require('../Models/model.js');
 const authController = {};
 
 authController.register = async (req, res, next) => {
-  const { username, password } = req.body;
-  const queryText = `INSERT INTO User_credentials (username,password) VALUES ($1,$2)`;
+  const { username, password, email } = req.body;
+  const queryText = `INSERT INTO User_credentials (username,password,email) VALUES ($1,$2,$3)`;
   const hashedPassWord = await bcrypt.hash(password, 10);
 
-  model.query(queryText, [username, password], (err) => {
+  model.query(queryText, [username, password, email], (err) => {
     if (err) {
       console.log(err);
       return next({

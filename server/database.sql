@@ -2,6 +2,7 @@ CREATE TABLE public.User_credentials
 (
   username varchar(50) NOT NULL,
   password varchar(255) NOT NULL,
+  email varchar(255) UNIQUE NOT NULL,
   CONSTRAINT PK_users PRIMARY KEY (username)
 );
 
@@ -11,7 +12,6 @@ CREATE TABLE Users
   firstname varchar(50) NOT NULL,
   lastname varchar(50) NOT NULL,
   profilepic bytea NULL,
-  email varchar(50) NOT NULL,
   githubhandle varchar(50) NOT NULL,
   username varchar(50) NOT NULL,
   CONSTRAINT PK_user_profile PRIMARY KEY (user_id),
