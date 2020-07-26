@@ -5,6 +5,7 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Form, Button } from 'react-bootstrap';
 
 const Signup = () => {
+
   const [registrationInputs, setRegistrationInputs] = useState({
     username: '',
     password: '',
@@ -17,7 +18,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password, email, confirmPassword } = registrationInputs;
-
+    
     if (password !== confirmPassword)
       return setErrorMsg(`Passwords don't match!`);
 
@@ -26,6 +27,8 @@ const Signup = () => {
       password,
       email,
     };
+
+    console.log(registrationInputs);
 
     // let response = await fetch('/api/register', {
     //   method: 'POST',
@@ -36,9 +39,9 @@ const Signup = () => {
     // });
 
     //TO-DO: NEED TO SEE WHAT BACKEND SENDS BACK
-    let response = 'succes';
-    if (response !== 'success') setErrorMsg(true);
-    else setErrorMsg('Your information was not valid');
+    // let response = 'succes';
+    // if (response !== 'success') setErrorMsg(true);
+    // else setErrorMsg('Your information was not valid');
   };
 
   const setInput = (e) => {
