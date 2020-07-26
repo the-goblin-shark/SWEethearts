@@ -3,7 +3,8 @@ import {
   Navbar,
   Nav /* Form, FormControl, Button, Container */,
 } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 const NavigateBar = () => {
   return (
@@ -15,12 +16,16 @@ const NavigateBar = () => {
       {/* Set class for Login and Signup button Nav item to `margin-left: auto;`*/}
       <Nav className="ml-auto">
         {/* TODO: Remove inline styling in favor of Bootstrap or separate stylesheet */}
-        <NavLink style={{ color: 'white' }} to="/login">
-          Login
-        </NavLink>
-        <NavLink style={{ color: 'white' }} to="/signup">
-          Signup
-        </NavLink>
+        {/* <Link to='/login'> */}
+          <Nav.Link style={{ color: 'white' }} href="/login">
+            Login
+          </Nav.Link>
+        {/* </Link> */}
+        {/* <Link to='/signup'> */}
+          <Nav.Link style={{ color: 'white' }} href="/signup">
+            Signup
+          </Nav.Link>
+        {/* </Link> */}
       </Nav>
     </Navbar>
   );
