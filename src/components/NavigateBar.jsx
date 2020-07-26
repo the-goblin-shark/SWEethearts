@@ -5,7 +5,6 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-
 const NavigateBar = () => {
   return (
     <Navbar bg="primary" variant="dark">
@@ -17,15 +16,20 @@ const NavigateBar = () => {
       <Nav className="ml-auto">
         {/* TODO: Remove inline styling in favor of Bootstrap or separate stylesheet */}
         {/* <Link to='/login'> */}
-          <Nav.Link style={{ color: 'white' }} href="/login">
-            Login
-          </Nav.Link>
+        <Nav.Link style={{ color: 'white' }} href="/login">
+          Login
+        </Nav.Link>
         {/* </Link> */}
         {/* <Link to='/signup'> */}
-          <Nav.Link style={{ color: 'white' }} href="/signup">
-            Signup
-          </Nav.Link>
+        <Nav.Link style={{ color: 'white' }} href="/signup">
+          Signup
+        </Nav.Link>
         {/* </Link> */}
+
+        {/* temporary link to render submit idea page */}
+        <Nav.Link style={{ color: 'white' }} href="/submit">
+          Submit Idea
+        </Nav.Link>
       </Nav>
     </Navbar>
   );
