@@ -35,7 +35,7 @@ const Signup = () => {
     //   body: JSON.stringify(body),
     // });
 
-    //TO DO: NEED TO SEE WHAT BACKEND SENDS BACK
+    //TO-DO: NEED TO SEE WHAT BACKEND SENDS BACK
     let response = 'succes';
 
     if (response !== 'success') setErrorMsg(true);

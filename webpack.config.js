@@ -47,7 +47,14 @@ const config = {
     },
   },
   devServer: {
+<<<<<<< HEAD
     contentBase: './dist',
+=======
+    contentBase: "./dist",
+    proxy: {
+      '/api': 'http://localhost:3000',
+    },
+>>>>>>> 67c4eb1657757ac89f76573dbdc57e67099351c8
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Landing from './Landing.jsx';
+import Explore from './Explore.jsx';
+import Login from './Login.jsx';
+import Signup from './Signup.jsx';
 import NavigateBar from './NavigateBar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -7,15 +11,20 @@ import Signup from './Signup';
 
 const App = () => {
   return (
-    // we would always have navbar render
-
-    // Use router to switch route accordingly
-    // <Router> <Switch> <Route to=/login/ component={login}>
     <Router>
-      <div>
+      {/* Using Fragment rather than native div to avoid React warnings */}
+      <Fragment>
+        {/* Navigation Bar is ever-present */}
         <NavigateBar />
-        <Signup />
-      </div>
+        {/* Use the first Route whose path matches current URL */}
+        <Switch>
+          {/* Render given component if given path matches current URL */}
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/explore" component={Explore} />
+        </Switch>
+      </Fragment>
     </Router>
   );
 };
