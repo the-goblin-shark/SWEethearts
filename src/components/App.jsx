@@ -14,7 +14,7 @@ const App = () => {
     <Router>
       <div>
         <NavigateBar />
-        <Login />
+        <Signup />
       </div>
     </Router>
   );

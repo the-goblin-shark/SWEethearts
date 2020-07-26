@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import '../styles/login.css';
+import '../styles/login-signup.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Form, Button } from 'react-bootstrap';
 
@@ -65,6 +65,7 @@ const Signup = () => {
               type="username"
               placeholder="Username"
               onChange={setInput}
+              required
             />
           </Form.Group>
 
@@ -83,6 +84,7 @@ const Signup = () => {
               type="password"
               placeholder="Password"
               onChange={setInput}
+              required
             />
           </Form.Group>
 
@@ -92,6 +94,7 @@ const Signup = () => {
               type="password"
               placeholder="Confirm Password"
               onChange={setInput}
+              required
             />
           </Form.Group>
 
