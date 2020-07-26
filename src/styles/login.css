@@ -1,0 +1,25 @@
+.login-container {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 1.2rem;
+  margin-bottom: 10rem;
+  min-width: 350px;
+}
+
+.error-msg {
+  margin-top: 0.5rem;
+  color: red;
+}
+
+.hidden {
+  display: none;
+}
