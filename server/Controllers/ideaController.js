@@ -69,6 +69,18 @@ ideaController.submitIdea = (req, res, next) => {
       imageURL,
       username,
     ];
+  } else {
+    queryText = `INSERT INTO Ideas (name, description, why, when_start, when_end, who, image, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
+    queryValue = [
+      name,
+      description,
+      why,
+      whenStart,
+      whenEnd,
+      teamNumber,
+      imageURL,
+      username,
+    ];
   }
 
   model.query(queryText, queryValue, (err) => {
