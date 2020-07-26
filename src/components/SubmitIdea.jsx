@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 const SubmitIdea = () => {
+  const [submittedIdea, setSubmittedIdea] = useState({});
+  useEffect(() => {
+    const fetchTechs = () => {
+      const results = ['React', ''];
+    };
+  });
   return (
     <Container>
       <Form>
         <Row>
           <Col md={6}>
-            <Form.Group controlId="whatIdea">
+            <Form.Group controlId="name">
               <Form.Label>WHAT</Form.Label>
               <Form.Control type="text" placeholder="Name your idea..." />
               <Form.Control type="text" placeholder="Describe your idea..." />
+            </Form.Group>
+
+            <Form.Group controlId="name">
+              <Form.Text className="text-muted">Describe your idea</Form.Text>
+              <Form.Control type="text" />
             </Form.Group>
 
             <Form.Group controlId="why">
@@ -21,12 +33,23 @@ const SubmitIdea = () => {
               <Form.Control type="text" />
             </Form.Group>
 
-            <Form.Group controlId="how">
+            {/* <Form.Group controlId="how">
               <Form.Label>HOW</Form.Label>
               <Form.Text className="text-muted">
                 What is the desired tech stack?
               </Form.Text>
               <Form.Control type="text" />
+            </Form.Group> */}
+            <Form.Group controllId="how">
+              <Form.Label>HOW</Form.Label>
+              <Typeahead
+                clearButton
+                id="tech-stacks"
+                labelKey="name"
+                multiple
+                options={options}
+                placeholder="Choose a state..."
+              />
             </Form.Group>
 
             <Form.Group controlId="who">

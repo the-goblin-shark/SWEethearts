@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.10.5",
+    "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "bootstrap": "^4.5.0",
     "cookie": "^0.4.1",
