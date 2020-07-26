@@ -1,10 +1,10 @@
 const express = require('express');
-const exploreController = require('../Controllers/exploreController.js');
+const ideaController = require('../Controllers/ideaController.js');
 
 const router = express.Router();
 
 // get router for explore page
-router.get('/', exploreController.getIdeas, (req, res) => {
+router.get('/', ideaController.getIdeas, (req, res) => {
   console.log('res.locals.ideas', res.locals.ideas);
   res.json(res.locals.ideas);
 });

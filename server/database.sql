@@ -19,8 +19,8 @@ CREATE TABLE Users
 );
 
 CREATE INDEX fkIdx_34 ON Users
-(
- username
+(z1
+username
 );
 
 CREATE TABLE Ideas
@@ -32,7 +32,7 @@ CREATE TABLE Ideas
   when_start date NOT NULL,
   when_end date NULL,
   who int NOT NULL,
-  image bytea NOT NULL,
+  image varchar NULL DEFAULT 'https://foroalfa.org/imagenes/ilustraciones/idea.png',
   creator_username varchar(50) NOT NULL,
   CONSTRAINT PK_ideas PRIMARY KEY (idea_id),
   CONSTRAINT FK_56 FOREIGN KEY (creator_username) REFERENCES public.User_credentials (username)

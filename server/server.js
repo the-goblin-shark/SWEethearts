@@ -8,6 +8,7 @@ const session = require('express-session');
 const model = require('./Models/model');
 const signUpRouter = require('./Routers/signupRouter');
 const exploreRouter = require('./Routers/exploreRouter');
+const submitRouter = require('./Routers/submitRouter');
 require('dotenv').config();
 const PORT = 3000;
 
@@ -27,6 +28,7 @@ app.use(
 
 app.use('/api/signup', signUpRouter);
 app.use('/api/explore', exploreRouter);
+app.use('/api/submit', submitRouter);
 
 // globoal error handler
 app.use((err, req, res, next) => {
