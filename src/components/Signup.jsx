@@ -16,8 +16,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { username, password, email, confirmPassword } = registrationInputs;
+
     if (password !== confirmPassword)
       return setErrorMsg(`Passwords don't match!`);
 
@@ -37,7 +37,6 @@ const Signup = () => {
 
     //TO-DO: NEED TO SEE WHAT BACKEND SENDS BACK
     let response = 'succes';
-
     if (response !== 'success') setErrorMsg(true);
     else setErrorMsg('Your information was not valid');
   };
