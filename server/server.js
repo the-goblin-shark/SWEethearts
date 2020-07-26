@@ -9,6 +9,7 @@ const model = require('./Models/model');
 const signUpRouter = require('./Routers/signupRouter');
 const exploreRouter = require('./Routers/exploreRouter');
 const submitRouter = require('./Routers/submitRouter');
+const loginRouter = require('./Routers/loginRouter');
 require('dotenv').config();
 const PORT = 3000;
 
@@ -26,7 +27,7 @@ app.use(
 	})
 );
 app.use('/api/login', loginRouter);
-app.use('/api/register', signUpRouter);
+app.use('/api/signup', signUpRouter);
 app.use('/api/explore', exploreRouter);
 app.use('/api/submit', submitRouter);
 
