@@ -3,47 +3,51 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: ["react-hot-loader/patch", "./src/index.js"],
+  entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
   },
   mode: process.env.NODE_ENV,
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader",
         exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['@babel/transform-runtime'],
+        },
       },
       {
         test: /\.css$/,
         use: [
           // 2. Inject CSS into the DOM
           {
-            loader: "style-loader",
+            loader: 'style-loader',
           },
           // 1. Convert CSS to CommonJS
           {
-            loader: "css-loader",
+            loader: 'css-loader',
           },
         ],
       },
       {
         test: /\.ts(x)?$/,
-        loader: "ts-loader",
+        loader: 'ts-loader',
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".tsx", ".ts"],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
     alias: {
-      "react-dom": "@hot-loader/react-dom",
+      'react-dom': '@hot-loader/react-dom',
     },
   },
   devServer: {
-    contentBase: "./dist",
+    contentBase: './dist',
     proxy: {
       '/api': 'http://localhost:3000',
     },

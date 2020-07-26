@@ -4,12 +4,12 @@ import { withRouter } from 'react-router-dom';
 
 /*
  * HELPER FUNCTION: nextPath
- * Push `path` to Landing component's destructured `history` prop 
- * (provided by invoking withRouter on Landing component before export) 
+ * Push `path` to Landing component's destructured `history` prop
+ * (provided by invoking withRouter on Landing component before export)
  */
 const redirectToPath = (history, path) => {
   history.push(path);
-}
+};
 
 const Landing = ({ history }) => {
   return (
@@ -18,11 +18,18 @@ const Landing = ({ history }) => {
         {/* Center landing page text by placing in middle column */}
         <Col></Col>
         <Col>
-          <Fragment>Welcome to Scratch Project</Fragment><br />
-          <Fragment>A place where developers make their dreams come true</Fragment><br />
-          <Button onClick={() => redirectToPath(history, '/explore')}
-            size='lg'
-            variant='outline-primary' block>
+          <Fragment>Welcome to Scratch Project</Fragment>
+          <br />
+          <Fragment>
+            A place where developers make their dreams come true
+          </Fragment>
+          <br />
+          <Button
+            onClick={() => redirectToPath(history, '/explore')}
+            size="lg"
+            variant="outline-primary"
+            block
+          >
             Start Exploring
           </Button>
         </Col>
@@ -30,6 +37,6 @@ const Landing = ({ history }) => {
       </Row>
     </Container>
   );
-}
+};
 
 export default withRouter(Landing);
