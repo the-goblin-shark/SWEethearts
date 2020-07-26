@@ -62,6 +62,7 @@ const SubmitIdea = () => {
               <Button variant="primary" type="submit">
                 SUBMIT IDEA
               </Button>
+              {'   '}
               <Button href="/explore" variant="outline-primary" type="link">
                 GO EXPLORE
               </Button>
