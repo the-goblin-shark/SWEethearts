@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import '../styles/ideapage.scss';
 import { Container, Col, Row, Button } from 'react-bootstrap';
 
@@ -113,7 +114,9 @@ const IdeaPage = (props) => {
               )}
             </Row>
             <Row className="mx-auto">
-              <Button variant="primary">Back to Explore</Button>
+              <NavLink to="/explore">
+                <Button variant="primary">Back to Explore</Button>
+              </NavLink>
             </Row>
           </Container>
         </Col>
