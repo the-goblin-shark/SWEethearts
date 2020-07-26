@@ -3,11 +3,19 @@ import {Container, Col, Row, Form, Card, Button, CardDeck } from 'react-bootstra
 
 
 const Explore = () => {
-
-  // const generateTech = 
+  
+  // making fetch request from the server to get data
+    // let response = await fetch('/api/login', {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // });
+  
+  // get technologies
   const techStack = ['TECH1', 'TECH2', 'TECH1', 'TECH2', 'TECH1', 'TECH2', 'Tech 33'];
-
-  const techGenerate = techStack.map( e => {
+  // Generate checkbox component for each technology 
+  const generateTech = techStack.map( e => {
      return(<Form>
         <div key='checkbox' className="mb-5 mt-5 ml-5">
           <Form.Check type='checkbox'>
@@ -18,8 +26,10 @@ const Explore = () => {
       </Form>)
   })
 
+  // get Ideas name, description, and images. 
   const ideaNames = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
-  const ideaGenerate = ideaNames.map( e => {
+  // Generate an array of box components
+  const generateBoxes = ideaNames.map( e => {
     return (
       <Card style={{ width: '18rem' }} className='m-2'>
         <Card.Img variant="top" src="holder.js/100px180" />
@@ -35,6 +45,7 @@ const Explore = () => {
     )
   })
   
+  // Search box component
   const searchIdea = (
     <Form>
     <Form.Group controlId="formBasicEmail">
@@ -52,16 +63,16 @@ const Explore = () => {
       <Row>
         <Col lg={3} className='mt-4'>
           <Row noGutters> <h2> Choose technology stack </h2></Row>
-            {/* {techgenerate}; */}
+            {/* {generateTech}; */}
           <div className=''>
-            {techGenerate}
+            {generateTech}
           </div>
         </Col>
 
         <Col lg={9} class="d-flex align-items-center" className='mt-4'>
           {searchIdea}
           <Row>
-            {ideaGenerate}
+            {generateBoxes}
           </Row>
         </Col>
       </Row>
