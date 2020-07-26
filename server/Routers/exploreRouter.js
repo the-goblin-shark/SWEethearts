@@ -9,4 +9,9 @@ router.get('/', ideaController.getIdeas, (req, res) => {
   res.json(res.locals.ideas);
 });
 
+router.get('/:ideaID', ideaController.getOneIdea, (req, res) => {
+  console.log('res.locals', res.locals.idea);
+  res.json(res.locals.idea);
+});
+
 module.exports = router;

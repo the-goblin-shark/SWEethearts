@@ -7,6 +7,9 @@ import NavigateBar from './NavigateBar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
+//DELETE FROM FRAGMENT BELOW
+import IdeaPage from './IdeaPage';
+
 const App = () => {
   return (
     <Router>
@@ -14,10 +17,11 @@ const App = () => {
       <Fragment>
         {/* Navigation Bar is ever-present */}
         <NavigateBar />
+        <IdeaPage />
         {/* Use the first Route whose path matches current URL */}
         <Switch>
           {/* Render given component if given path matches current URL */}
-          <Route exact path="/" component={Landing} />
+          {/* <Route exact path="/" component={Landing} /> */}
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/explore" component={Explore} />
