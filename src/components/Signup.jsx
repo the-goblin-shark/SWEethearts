@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import '../styles/login-signup.css';
+import '../styles/login-signup.scss';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Form, Button } from 'react-bootstrap';
 
 const Signup = () => {
-
   const [registrationInputs, setRegistrationInputs] = useState({
     username: '',
     password: '',
@@ -14,11 +13,11 @@ const Signup = () => {
   });
 
   const [errorMsg, setErrorMsg] = useState('');
+  const [registerStatus, setRegisterStatus] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password, email, confirmPassword } = registrationInputs;
-    
     if (password !== confirmPassword)
       return setErrorMsg(`Passwords don't match!`);
 
@@ -28,20 +27,17 @@ const Signup = () => {
       email,
     };
 
-    console.log(registrationInputs);
+    let response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
 
-    // let response = await fetch('/api/register', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(body),
-    // });
-
-    //TO-DO: NEED TO SEE WHAT BACKEND SENDS BACK
-    // let response = 'succes';
-    // if (response !== 'success') setErrorMsg(true);
-    // else setErrorMsg('Your information was not valid');
+    if (response.status === 200) setRegisterStatus(true);
+    else
+      setErrorMsg('New user could not be created - duplicate username/email');
   };
 
   const setInput = (e) => {
@@ -51,8 +47,15 @@ const Signup = () => {
     });
   };
 
-  //   if (loginStatus)
-  //     return <Redirect to={{ pathname: '/explore', state: { username } }} />;
+  if (registerStatus)
+    return (
+      <Redirect
+        to={{
+          pathname: '/explore',
+          state: { username: registrationInputs.username },
+        }}
+      />
+    );
 
   return (
     <div className="login-container">

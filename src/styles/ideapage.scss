@@ -1,0 +1,29 @@
+#idea-wrapper {
+  margin-top: 10vh;
+  border: 1px solid black;
+  border-radius: 8px;
+  min-width: fit-content;
+  width: 75%;
+}
+
+#idea-pic {
+  height: 200px;
+  align-self: center;
+}
+
+.prof-pic {
+  height: 30px;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.unstyled-li {
+  list-style: none;
+}
+
+ul {
+  padding: 0;
+}

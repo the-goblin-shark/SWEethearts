@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import '../styles/login-signup.css';
+import '../styles/login-signup.scss';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Form, Button } from 'react-bootstrap';
 
@@ -10,31 +10,26 @@ const Login = () => {
     password: '',
   });
 
-  //for error message, maybe change to better name
+  //used to toggle error message if auth fails
+  //as well as redirect if auth succeeds
   const [loginStatus, setLoginStatus] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = loginInputs;
-
     const body = {
       username,
       password,
     };
+    let response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
 
-    // let response = await fetch('/api/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(body),
-    // });
-
-    //TO DO: NEED TO SEE WHAT BACKEND SENDS BACK
-    //PLACEHOLDER FOR NOW
-    let response = 'success';
-
-    if (response === 'success') setLoginStatus(true);
+    if (response.status === 200) setLoginStatus(true);
     else setLoginStatus(false);
   };
 
@@ -43,7 +38,11 @@ const Login = () => {
   };
 
   if (loginStatus)
-    return <Redirect to={{ pathname: '/explore', state: { username } }} />;
+    return (
+      <Redirect
+        to={{ pathname: '/explore', state: { username: loginInputs.username } }}
+      />
+    );
 
   return (
     <div className="login-container">

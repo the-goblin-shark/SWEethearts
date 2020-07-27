@@ -123,24 +123,41 @@ ideaController.submitIdea = (req, res, next) => {
 
 // middleware to get one idea
 // need to set up route for this
-ideaController.getOneIdea = (req, res, next) => {
-  // how will idea_id be delivered? by id?
-  const { id } = req.params;
-  const queryText = `SELECT * FROM Ideas WHERE idea_id=${id}`;
-
-  model.query(queryText, (err, result) => {
-    if (err) {
-      console.log(err);
-      return next({
-        log: `error occurred at getOneIdea middleware. error message is: ${err}`,
-        status: 400,
-        message: { err: 'An error occurred' },
-      });
-    }
+ideaController.getOneIdea = async (req, res, next) => {
+  const id = req.params.ideaID;
+  try {
+    const ideasQueryText = `SELECT * FROM Ideas 
+    JOIN Users 
+    ON ideas.creator_username = users.username    
+    WHERE idea_id=${id}`;
+    const ideaDetail = await model.query(ideasQueryText);
     // rows will only contain one. ok to destructure
-    [res.locals.idea] = result.rows;
+    [res.locals.idea] = ideaDetail.rows;
+
+    const participantQueryText = `SELECT * 
+    FROM idea_participants 
+    JOIN users
+    ON idea_participants.participant_username = users.username
+    WHERE idea_id = ${id}`;
+    const participants = await model.query(participantQueryText);
+    //will return array of objects
+    res.locals.idea = { ...res.locals.idea, participants: participants.rows };
+
+    const stackQueryText = `SELECT * FROM idea_tech_stacks 
+    JOIN tech_stacks 
+    ON tech_stacks.tech_id = idea_tech_stacks.tech_id
+    WHERE idea_id = ${id}`;
+    const techStacks = await model.query(stackQueryText);
+    res.locals.idea = { ...res.locals.idea, techStacks: techStacks.rows };
+
     return next();
-  });
+  } catch (err) {
+    return next({
+      log: `error occurred at getOneIdea middleware. error message is: ${err}`,
+      status: 400,
+      message: { err: 'An error occurred' },
+    });
+  }
 };
 
 module.exports = ideaController;

@@ -21,6 +21,11 @@ const config = {
         },
       },
       {
+        test: /\.scss?/,
+        exclude: /(node_modules)/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
         test: /\.css$/,
         use: [
           // 2. Inject CSS into the DOM
