@@ -14,6 +14,8 @@ CREATE TABLE Users
   profilepic varchar(65535) NULL,
   githubhandle varchar(50) NOT NULL,
   username varchar(50) NOT NULL,
+  linkedin varchar(255) NULL,
+  personalpage varchar(255) NULL,
   CONSTRAINT PK_user_profile PRIMARY KEY (user_id),
   CONSTRAINT FK_34 FOREIGN KEY (username) REFERENCES public.User_credentials (username)
 );
@@ -102,4 +104,23 @@ CREATE TABLE Tech_Stacks
   tech_id serial NOT NULL,
   name varchar(50) NOT NULL,
   CONSTRAINT PK_tech_stacks PRIMARY KEY ( tech_id )
+);
+
+CREATE TABLE User_tech_stacks
+(
+  user_id integer NOT NULL,
+  tech_id integer NOT NULL,
+  CONSTRAINT FK_94 FOREIGN KEY (user_id) REFERENCES public.Users (user_id),
+  CONSTRAINT FK_97 FOREIGN KEY (tech_id) REFERENCES Tech_Stacks
+  (tech_id)
+);
+
+CREATE INDEX fkIdx_94 ON User_tech_stacks
+(
+ user_id
+);
+
+CREATE INDEX fkIdx_97 ON User_tech_stacks
+(
+ tech_id
 );
