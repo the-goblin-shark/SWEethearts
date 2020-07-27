@@ -30,6 +30,7 @@ ideaController.submitIdea = (req, res, next) => {
     name,
     description,
     why,
+    techStack,
     whenStart,
     whenEnd,
     teamNumber,
