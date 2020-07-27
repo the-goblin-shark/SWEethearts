@@ -26,9 +26,10 @@ const Explore = (props) => {
       image: '',
     },
   ]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    fetch('api/explore', {
+    fetch(`api/explore`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -56,13 +57,22 @@ const Explore = (props) => {
       </Form>
     );
   });
-
+  // add hander can change query with word from searchbar
+  const onChange = (q) => {
+    setQuery(q);
+  };
   // get Ideas name, description, and images.
   // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
+
   let ideas = response;
+  // filter Ideas array with query from state so if query is exist Ideas array will change
+  let sortedIdeas = ideas.filter((data) => {
+    return data.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  });
+
   // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
-  // Generate an array of box components
-  const generateBoxes = ideas.map((idea, idx) => {
+  // Generate an array of box components with sortedIdea
+  const generateBoxes = sortedIdeas.map((idea, idx) => {
     return (
       <Card key={idx} style={{ width: '18rem' }} className="m-2">
         <Card.Img variant="top" src={idea.image} />
@@ -97,6 +107,7 @@ const Explore = (props) => {
           size="lg"
           type="text"
           placeholder="Search your dream..."
+          onChange={(e) => onChange(e.target.value)}
         />
         {/* <Button variant="primary" type="submit" className='mt-2'></Button> */}
       </Form.Group>
