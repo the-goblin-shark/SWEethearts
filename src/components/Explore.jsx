@@ -1,45 +1,61 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {Container, Col, Row, Form, Card, Button, CardDeck } from 'react-bootstrap'; 
-
+import Spinner from './Spinner'
 
 const Explore = () => {
+
+  const [response, setResponse] = useState([{
+    idea_id: '',
+    name: '',
+    description: '',
+    why: '',
+    when_start:'',
+    when_end: '',
+    who: '',
+    creator_username: '',
+    image: '',
+  }]);
   
-  // making fetch request from the server to get data
-    // let response = await fetch('/api/login', {
-    //   method: 'GET',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // });
-  
+  useEffect(() => {
+    fetch('api/explore', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    .then((data) => data.json())
+    .then((data) => setResponse(data));
+  }, [])
+
   // get technologies
-  const techStack = ['TECH1', 'TECH2', 'TECH1', 'TECH2', 'TECH1', 'TECH2', 'Tech 33'];
+  const techStack = ['HTML', 'JavaScript', 'Python', 'NodeJS'];
   // Generate checkbox component for each technology 
   const generateTech = techStack.map( e => {
      return(<Form>
         <div key='checkbox' className="mb-5 mt-5 ml-5">
           <Form.Check type='checkbox'>
-            <Form.Check.Input type='checkbox' isValid size='lg'/>
-           <Form.Check.Label> {e} </Form.Check.Label>
+            <Form.Check.Input type='checkbox' isValid/>
+           <Form.Check.Label className='ml-2' > <h2>{e}</h2> </Form.Check.Label>
           </Form.Check>
         </div>
       </Form>)
   })
 
   // get Ideas name, description, and images. 
-  const ideaNames = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
+  // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
+  let ideas = response;
+  // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
   // Generate an array of box components
-  const generateBoxes = ideaNames.map( e => {
+  const generateBoxes = ideas.map( idea => {
     return (
       <Card style={{ width: '18rem' }} className='m-2'>
-        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Img variant="top" src={idea.image} />
         <Card.Body>
-          <Card.Title>Card Title</Card.Title>
+          <Card.Title>{idea.name}</Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the bulk of
-            the card's content.
+            {idea.description}
               </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Button variant="primary"> Find out more </Button>
         </Card.Body>
       </Card>
     )
@@ -51,9 +67,7 @@ const Explore = () => {
     <Form.Group controlId="formBasicEmail">
         <Form.Label> <h1>May your dream come true</h1> </Form.Label>
       <Form.Control size="lg" type="text" placeholder="Search your dream..." />
-      <Button variant="primary" type="submit" className='mt-2'>
-        Search your Dream
-      </Button>
+      {/* <Button variant="primary" type="submit" className='mt-2'></Button> */}
     </Form.Group>
     </Form>
   )
@@ -63,7 +77,6 @@ const Explore = () => {
       <Row>
         <Col lg={3} className='mt-4'>
           <Row noGutters> <h2> Choose technology stack </h2></Row>
-            {/* {generateTech}; */}
           <div className=''>
             {generateTech}
           </div>
@@ -78,7 +91,7 @@ const Explore = () => {
       </Row>
   </Container>);
 
-  return (<Fragment> {explorePage} </Fragment>);
+  return (response.length === 1 ? <Spinner /> :  <Fragment> {explorePage} </Fragment>);
 };
 
 export default Explore;
