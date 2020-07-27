@@ -4,7 +4,9 @@ import '../styles/login-signup.scss';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Form, Button } from 'react-bootstrap';
 
-const Login = () => {
+const Login = (props) => {
+  const { authStatus, setAuthStatus } = props;
+
   const [loginInputs, setLoginInputs] = useState({
     username: '',
     password: '',
@@ -29,22 +31,19 @@ const Login = () => {
       body: JSON.stringify(body),
     });
 
-    if (response.status === 200) setLoginStatus(true);
-    else setLoginStatus(false);
+    if (response.status === 200) {
+      setLoginStatus(true);
+      setAuthStatus({ isLoggedIn: true, username });
+    } else setLoginStatus(false);
   };
 
   const setInput = (e) => {
     setLoginInputs({ ...loginInputs, [e.target.id]: e.target.value });
   };
 
-  if (loginStatus)
-    return (
-      <Redirect
-        to={{ pathname: '/explore', state: { username: loginInputs.username } }}
-      />
-    );
-
-  return (
+  return loginStatus || authStatus.isLoggedIn ? (
+    <Redirect to={{ pathname: '/explore' }} />
+  ) : (
     <div className="login-container">
       <div className="login-box">
         <center>
