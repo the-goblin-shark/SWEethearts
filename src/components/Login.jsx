@@ -38,7 +38,11 @@ const Login = () => {
   };
 
   if (loginStatus)
-    return <Redirect to={{ pathname: '/explore', state: { username } }} />;
+    return (
+      <Redirect
+        to={{ pathname: '/explore', state: { username: loginInputs.username } }}
+      />
+    );
 
   return (
     <div className="login-container">
