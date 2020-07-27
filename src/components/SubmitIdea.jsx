@@ -48,7 +48,7 @@ const SubmitIdea = () => {
     console.log('name', name);
     console.log('value', value);
     switch (name) {
-      case 'name':
+      case 'ideaName':
         setName(value);
         console.log('name', name);
         break;
@@ -71,7 +71,7 @@ const SubmitIdea = () => {
               <Form.Label>WHAT</Form.Label>
               <Form.Text className="text-muted">Name your idea</Form.Text>
               <Form.Control
-                name="name"
+                name="ideaName"
                 value={name}
                 onChange={handleChange}
                 type="text"
