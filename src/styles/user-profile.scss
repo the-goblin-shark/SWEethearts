@@ -1,0 +1,26 @@
+#userProfileContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  background-color: #2E7BFF;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 2rem;
+}
+
+#row1 {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profilePic {
+  height: 150px;
+  width: 150px;
+  margin: 20px;
+}
