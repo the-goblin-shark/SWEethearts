@@ -21,7 +21,7 @@ const IdeaPage = (props) => {
 
   const handleInterestClick = async () => {
     setInterested(true);
-    //need to actually build out functionality to email/notify creator
+    //TODO: actually build out functionality to email/notify creator
   };
 
   if (!Object.keys(ideaData).length)
@@ -46,7 +46,7 @@ const IdeaPage = (props) => {
   return (
     <Container id="idea-wrapper">
       <Row>
-        <Col lg={6}>
+        <Col lg={7}>
           <h4>WHY</h4>
           <Container>{why}</Container>
 
@@ -57,15 +57,17 @@ const IdeaPage = (props) => {
           <Container>
             <ul>
               {techStacks.map((stack, idx) => (
-                <li key={idx}>{stack}</li>
+                <li key={idx}>{stack.name}</li>
               ))}
             </ul>
           </Container>
 
           <h4>WHEN</h4>
           <Container>
-            <h6>Start Date: {when_start}</h6>
-            <h6>End Date: {when_end}</h6>
+            <h6>Start Date: {when_start.substring(0, 10)}</h6>
+            {when_end ? (
+              <h6>End Date: {when_end.substring(0, 10)}</h6>
+            ) : undefined}
           </Container>
 
           <h4>WHO</h4>
@@ -88,7 +90,7 @@ const IdeaPage = (props) => {
           </Container>
         </Col>
 
-        <Col lg={4}>
+        <Col lg={5}>
           <Row>
             <Col>
               <h4>{name}</h4>
@@ -104,18 +106,24 @@ const IdeaPage = (props) => {
           <Container>
             <Row className="mx-auto">
               {!interested ? (
-                <Button onClick={handleInterestClick} variant="info">
+                <Button
+                  onClick={handleInterestClick}
+                  variant="info"
+                  className="m-2"
+                >
                   I'm Interested!
                 </Button>
               ) : (
-                <Button disabled variant="info">
+                <Button disabled variant="info" className="m-2">
                   Idea Creator Notified!
                 </Button>
               )}
             </Row>
             <Row className="mx-auto">
               <NavLink to="/explore">
-                <Button variant="primary">Back to Explore</Button>
+                <Button variant="primary" className="m-2">
+                  Back to Explore
+                </Button>
               </NavLink>
             </Row>
           </Container>

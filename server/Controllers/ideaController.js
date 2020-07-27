@@ -118,8 +118,9 @@ ideaController.getOneIdea = async (req, res, next) => {
     //will return array of objects
     res.locals.idea = { ...res.locals.idea, participants: participants.rows };
 
-    const stackQueryText = `SELECT * 
-    FROM idea_tech_stacks 
+    const stackQueryText = `SELECT * FROM idea_tech_stacks 
+    JOIN tech_stacks 
+    ON tech_stacks.tech_id = idea_tech_stacks.tech_id
     WHERE idea_id = ${id}`;
     const techStacks = await model.query(stackQueryText);
     res.locals.idea = { ...res.locals.idea, techStacks: techStacks.rows };
