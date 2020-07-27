@@ -11,7 +11,7 @@ CREATE TABLE Users
   user_id serial NOT NULL,
   firstname varchar(50) NOT NULL,
   lastname varchar(50) NOT NULL,
-  profilepic bytea NULL,
+  profilepic varchar(65535) NULL,
   githubhandle varchar(50) NOT NULL,
   username varchar(50) NOT NULL,
   CONSTRAINT PK_user_profile PRIMARY KEY (user_id),
@@ -32,7 +32,7 @@ CREATE TABLE Ideas
   when_start date NOT NULL,
   when_end date NULL,
   who int NOT NULL,
-  image varchar NULL DEFAULT 'https://foroalfa.org/imagenes/ilustraciones/idea.png',
+  image varchar(65535) NULL DEFAULT 'https://foroalfa.org/imagenes/ilustraciones/idea.png',
   creator_username varchar(50) NOT NULL,
   CONSTRAINT PK_ideas PRIMARY KEY (idea_id),
   CONSTRAINT FK_56 FOREIGN KEY (creator_username) REFERENCES public.User_credentials (username)
