@@ -15,6 +15,7 @@ const SubmitIdea = () => {
   const [imageURL, setImageURL] = useState('');
   const [whenStart, setWhenStart] = useState('');
   const [whenEnd, setWhenEnd] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // get request to backend to fetch tech stack data
   useEffect(() => {
@@ -77,11 +78,47 @@ const SubmitIdea = () => {
       // hardcode, need a logic to pass username as prop
       username: 'Justin',
     };
-    console.log('data', data);
+    // console.log('data', data);
     await axios.post('/api/submit', data);
+    setIsSubmitted(true);
   };
 
-  return (
+  return isSubmitted ? (
+    <div
+      style={{
+        marginTop: 50,
+        display: 'flex',
+        width: '100%',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      <h1 style={{ textAlign: 'center' }}>
+        You submitted your idea successfully!
+      </h1>
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          marginTop: 15,
+        }}
+      >
+        <Button variant="primary" onClick={() => setIsSubmitted(false)}>
+          SUBMIT ANOTHER ONE
+        </Button>
+        <Button
+          href="/explore"
+          style={{ marginLeft: 10 }}
+          variant="outline-primary"
+          type="link"
+        >
+          GO EXPLORE IDEAS
+        </Button>
+      </div>
+    </div>
+  ) : (
     <Container style={{ marginTop: 50 }}>
       <Form onSubmit={handleSubmit}>
         <Row>
