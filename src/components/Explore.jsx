@@ -1,13 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import {
-  Container,
-  Col,
-  Row,
-  Form,
-  Card,
-  Button,
-  CardDeck,
-} from 'react-bootstrap';
+import { Container, Col, Row, Form, Card, Button } from 'react-bootstrap';
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import Spinner from './Spinner';
 
@@ -23,32 +16,35 @@ const Explore = (props) => {
       who: '',
       creator_username: '',
       image: '',
+      techstacks: [],
     },
   ]);
 
+  const [techList, setTechList] = useState([{ tech_id: '', name: '' }]);
+
   useEffect(() => {
-    fetch('api/explore', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((data) => data.json())
-      .then((data) => setResponse(data));
+    const fetchData = async () => {
+      const results = await axios.get('api/explore');
+      // console.log('results.data', results.data);
+      setResponse(results.data[0]);
+      setTechList(results.data[1]);
+    };
+
+    fetchData();
   }, []);
 
   // get technologies
-  const techStack = ['HTML', 'JavaScript', 'Python', 'NodeJS'];
+  const techStack = techList.map((tech) => tech.name);
   // Generate checkbox component for each technology
   const generateTech = techStack.map((tech, idx) => {
     return (
       <Form key={idx}>
-        <div key="checkbox" className="mb-5 mt-5 ml-5">
+        <div key="checkbox" className="mb-2 mt-2 ml-3">
           <Form.Check type="checkbox">
             <Form.Check.Input type="checkbox" isValid />
             <Form.Check.Label className="ml-2">
               {' '}
-              <h2>{tech}</h2>{' '}
+              <h4 style={{ color: 'lightblue' }}>{tech}</h4>{' '}
             </Form.Check.Label>
           </Form.Check>
         </div>
@@ -68,6 +64,10 @@ const Explore = (props) => {
         <Card.Body>
           <Card.Title>{idea.name}</Card.Title>
           <Card.Text>{idea.description}</Card.Text>
+          <Card.Text style={{ fontSize: 14, fontStyle: 'italic' }}>
+            <span>Tech Stacks: </span>
+            <br /> {idea.techstacks.join(', ')}
+          </Card.Text>
           <NavLink
             to={{
               pathname: '/idea',
@@ -107,7 +107,7 @@ const Explore = (props) => {
         <Col lg={3} className="mt-4">
           <Row noGutters>
             {' '}
-            <h2> Choose technology stack </h2>
+            <h2 className="mb-4"> Choose technology stack </h2>
           </Row>
           <div className="">{generateTech}</div>
         </Col>
