@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import Spinner from './Spinner';
 
 const Explore = (props) => {
+  const { authStatus } = props;
   const [response, setResponse] = useState([
     {
       idea_id: '',
@@ -90,6 +91,7 @@ const Explore = (props) => {
               pathname: '/idea',
               state: {
                 idea_id: idea.idea_id,
+                authStaus: 101,
               },
             }}
           >

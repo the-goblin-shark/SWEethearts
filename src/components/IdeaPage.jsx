@@ -5,7 +5,8 @@ import '../styles/ideapage.scss';
 import { Container, Col, Row, Button } from 'react-bootstrap';
 
 const IdeaPage = (props) => {
-  let { idea_id } = props.location.state;
+  //passed in from Explore
+  let { idea_id, authStatus } = props.location.state;
   const [ideaData, setIdeaData] = useState({});
   const [interested, setInterested] = useState(false);
 
