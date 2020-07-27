@@ -11,7 +11,7 @@ CREATE TABLE Users
   user_id serial NOT NULL,
   firstname varchar(50) NOT NULL,
   lastname varchar(50) NOT NULL,
-  profilepic varchar(65535) NULL,
+  profilepic varchar(65535) NULL DEFAULT 'https://www.eguardtech.com/wp-content/uploads/2018/08/Network-Profile.png',
   githubhandle varchar(50) NOT NULL,
   username varchar(50) NOT NULL,
   CONSTRAINT PK_user_profile PRIMARY KEY (user_id),
