@@ -16,7 +16,7 @@ ideaController.getIdeas = (req, res, next) => {
         message: { err: 'An error occurred' },
       });
     }
-    console.log('results', results.rows);
+    // console.log('results', results.rows);
     res.locals.ideas = results.rows;
     return next();
   });
