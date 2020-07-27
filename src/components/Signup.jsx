@@ -8,6 +8,8 @@ const Signup = (props) => {
   const { authStatus, setAuthStatus } = props;
 
   const [registrationInputs, setRegistrationInputs] = useState({
+    firstname: '',
+    lastname: '',
     username: '',
     password: '',
     confirmPassword: '',
@@ -69,6 +71,28 @@ const Signup = (props) => {
             <Form.Control
               type="username"
               placeholder="Username"
+              onChange={setInput}
+              required
+            />
+          </Form.Group>
+
+          <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="firstname">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control
+              type="firstname"
+              placeholder="First Name"
+              onChange={setInput}
+              required
+            />
+          </Form.Group>
+
+          <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="lastname">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control
+              type="lastname"
+              placeholder="Last Name"
               onChange={setInput}
               required
             />
