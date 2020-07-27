@@ -17,9 +17,11 @@ const NavigateBar = () => {
         {/* TODO: Remove inline styling in favor of Bootstrap or separate stylesheet */}
 
         {/* temporary link to render submit idea page */}
-        <Nav.Link style={{ color: 'white' }} href="/submit">
-          Submit Idea
-        </Nav.Link>
+        <Link to="/submit">
+          <Nav.Link style={{ color: 'white' }} href="/submit">
+            Submit Idea
+          </Nav.Link>
+        </Link>
         <Link to="/login">
           <Nav.Link style={{ color: 'white' }} href="/login">
             Login
