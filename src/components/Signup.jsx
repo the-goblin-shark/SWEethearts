@@ -36,6 +36,8 @@ const Signup = () => {
     });
 
     if (response.status === 200) setRegisterStatus(true);
+    else
+      setErrorMsg('New user could not be created - duplicate username/email');
   };
 
   const setInput = (e) => {
