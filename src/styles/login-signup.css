@@ -24,4 +24,15 @@
   display: none;
 }
 
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  width: 22px;
+  height: 22px;
+  background-color: #ddd;
+  position: relative;
+}
 
+.form-check-label {
+  color: red;
+}
