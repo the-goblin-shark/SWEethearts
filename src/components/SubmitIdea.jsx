@@ -4,7 +4,9 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import axios from 'axios';
 
-const SubmitIdea = () => {
+const SubmitIdea = (props) => {
+  const { authStatus } = props;
+
   const [retrievedTechStacks, setRetrievedTechStacks] = useState([]);
 
   const [name, setName] = useState('');

@@ -4,7 +4,9 @@ import '../styles/login-signup.scss';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import { Form, Button } from 'react-bootstrap';
 
-const Signup = () => {
+const Signup = (props) => {
+  const { authStatus, setAuthStatus } = props;
+
   const [registrationInputs, setRegistrationInputs] = useState({
     username: '',
     password: '',
@@ -35,8 +37,10 @@ const Signup = () => {
       body: JSON.stringify(body),
     });
 
-    if (response.status === 200) setRegisterStatus(true);
-    else
+    if (response.status === 200) {
+      setRegisterStatus(true);
+      setAuthStatus({ isLoggedIn: true, username });
+    } else
       setErrorMsg('New user could not be created - duplicate username/email');
   };
 
@@ -47,17 +51,13 @@ const Signup = () => {
     });
   };
 
-  if (registerStatus)
-    return (
-      <Redirect
-        to={{
-          pathname: '/explore',
-          state: { username: registrationInputs.username },
-        }}
-      />
-    );
-
-  return (
+  return registerStatus || authStatus.isLoggedIn ? (
+    <Redirect
+      to={{
+        pathname: '/explore',
+      }}
+    />
+  ) : (
     <div className="login-container">
       <div className="login-box">
         <center>
