@@ -10,7 +10,7 @@ const SubmitIdea = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [why, setWhy] = useState('');
-  const [techStacks, setTechStacks] = useState([]);
+  const [techStack, setTechStack] = useState([]);
   const [teamNumber, setTeamNumber] = useState('');
   const [imageURL, setImageURL] = useState('');
   const [whenStart, setWhenStart] = useState('');
@@ -55,12 +55,21 @@ const SubmitIdea = () => {
     }
   };
 
+  // helper function to convert tech stack into tech stack id
+  const techIDConverter = (techs) => {
+    const result = techs.map((el) => retrievedTechStacks.indexOf(el) + 1);
+    return result;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // convert tech stack into tech stack id
+    const techStackID = techIDConverter(techStack);
     const data = {
       name,
       description,
       why,
+      techStack: techStackID,
       whenStart,
       whenEnd,
       teamNumber,
@@ -107,9 +116,9 @@ const SubmitIdea = () => {
                 id="techStacks"
                 labelKey="name"
                 multiple
-                onChange={setTechStacks}
+                onChange={setTechStack}
                 options={retrievedTechStacks}
-                selected={techStacks}
+                selected={techStack}
               />
             </Form.Group>
 

@@ -45,14 +45,14 @@ ideaController.submitIdea = (req, res, next) => {
   // if dateEnd is not given, front end to assign it as null
 
   // if imageurl or endDate is falsy, then we have to omit from query text/value so that it will default to default image or date(null)
-  let queryText;
-  let queryValue;
+  let queryText1;
+  let queryValue1;
   if (!whenEnd && !imageURL) {
-    queryText = `INSERT INTO Ideas (name, description, why, when_start, who, creator_username) VALUES ($1, $2, $3, $4, $5, $6)`;
-    queryValue = [name, description, why, whenStart, teamNumberInt, username];
+    queryText1 = `INSERT INTO Ideas (name, description, why, when_start, who, creator_username) VALUES ($1, $2, $3, $4, $5, $6) RETURNING idea_id`;
+    queryValue1 = [name, description, why, whenStart, teamNumberInt, username];
   } else if (!imageURL) {
-    queryText = `INSERT INTO Ideas (name, description, why, when_start, when_end, who, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-    queryValue = [
+    queryText1 = `INSERT INTO Ideas (name, description, why, when_start, when_end, who, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING idea_id`;
+    queryValue1 = [
       name,
       description,
       why,
@@ -62,8 +62,8 @@ ideaController.submitIdea = (req, res, next) => {
       username,
     ];
   } else if (!whenEnd) {
-    queryText = `INSERT INTO Ideas (name, description, why, when_start, who, image, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-    queryValue = [
+    queryText1 = `INSERT INTO Ideas (name, description, why, when_start, who, image, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING idea_id`;
+    queryValue1 = [
       name,
       description,
       why,
@@ -73,8 +73,8 @@ ideaController.submitIdea = (req, res, next) => {
       username,
     ];
   } else {
-    queryText = `INSERT INTO Ideas (name, description, why, when_start, when_end, who, image, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`;
-    queryValue = [
+    queryText1 = `INSERT INTO Ideas (name, description, why, when_start, when_end, who, image, creator_username) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING idea_id`;
+    queryValue1 = [
       name,
       description,
       why,
@@ -85,14 +85,36 @@ ideaController.submitIdea = (req, res, next) => {
       username,
     ];
   }
-
-  model.query(queryText, queryValue, (err) => {
+  let addedIdeaId;
+  model.query(queryText1, queryValue1, async (err, result) => {
     if (err) {
       console.log(err);
       return next({
-        log: `error occurred at submitIdea middleware. error message is: ${err}`,
+        log: `error occurred at submitIdea middleware query1. error message is: ${err}`,
         status: 400,
         message: { err: 'An error occurred' },
+      });
+    }
+    addedIdeaId = result.rows[0].idea_id;
+
+    // separate query to insert tech stacks into idea_tech_stacks
+    let queryText2;
+    const quertValue2 = [];
+    for (let i = 0; i < techStack.length; i += 1) {
+      quertValue2.push([addedIdeaId, techStack[i]]);
+    }
+    // console.log(techStack);
+    for (let i = 0; i < techStack.length; i += 1) {
+      queryText2 = `INSERT INTO Idea_tech_stacks (idea_id, tech_id) VALUES ($1, $2)`;
+      await model.query(queryText2, quertValue2[i], (err) => {
+        if (err) {
+          console.log(err);
+          return next({
+            log: `error occurred at submitIdea middleware query2. error message is: ${err}`,
+            status: 400,
+            message: { err: 'An error occurred' },
+          });
+        }
       });
     }
     return next();
