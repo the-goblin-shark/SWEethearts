@@ -10,6 +10,10 @@ const signUpRouter = require('./Routers/signupRouter');
 const exploreRouter = require('./Routers/exploreRouter');
 const submitRouter = require('./Routers/submitRouter');
 const loginRouter = require('./Routers/loginRouter');
+const flash = require('express-flash');
+const initializePassport = require('./passport');
+const passport = require('passport');
+initializePassport(passport);
 require('dotenv').config();
 const PORT = 3000;
 
@@ -26,6 +30,9 @@ app.use(
 		saveUninitialized: false,
 	})
 );
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 app.use('/api/login', loginRouter);
 app.use('/api/signup', signUpRouter);
 app.use('/api/explore', exploreRouter);
