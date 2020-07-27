@@ -200,7 +200,7 @@ const SubmitIdea = () => {
             </Form.Group>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Button variant="primary" type="submit">
-                SUBMIT IDEA
+                SUBMIT
               </Button>
               {'   '}
               <Button
@@ -209,7 +209,7 @@ const SubmitIdea = () => {
                 variant="outline-primary"
                 type="link"
               >
-                GO EXPLORE
+                CANCEL
               </Button>
             </div>
           </Col>
