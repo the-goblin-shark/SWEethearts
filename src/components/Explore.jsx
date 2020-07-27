@@ -40,15 +40,15 @@ const Explore = (props) => {
   // get technologies
   const techStack = ['HTML', 'JavaScript', 'Python', 'NodeJS'];
   // Generate checkbox component for each technology
-  const generateTech = techStack.map((e) => {
+  const generateTech = techStack.map((tech, idx) => {
     return (
-      <Form>
+      <Form key={idx}>
         <div key="checkbox" className="mb-5 mt-5 ml-5">
           <Form.Check type="checkbox">
             <Form.Check.Input type="checkbox" isValid />
             <Form.Check.Label className="ml-2">
               {' '}
-              <h2>{e}</h2>{' '}
+              <h2>{tech}</h2>{' '}
             </Form.Check.Label>
           </Form.Check>
         </div>
@@ -61,9 +61,9 @@ const Explore = (props) => {
   let ideas = response;
   // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
   // Generate an array of box components
-  const generateBoxes = ideas.map((idea) => {
+  const generateBoxes = ideas.map((idea, idx) => {
     return (
-      <Card style={{ width: '18rem' }} className="m-2">
+      <Card key={idx} style={{ width: '18rem' }} className="m-2">
         <Card.Img variant="top" src={idea.image} />
         <Card.Body>
           <Card.Title>{idea.name}</Card.Title>
