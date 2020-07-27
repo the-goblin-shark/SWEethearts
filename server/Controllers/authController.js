@@ -45,36 +45,50 @@ authController.getProfile = async (req, res, next) => {
 };
 
 // middeware to edit profiles (INCOMPLETE)
-authController.editProfile = (req, res, next) => {
-  const { username, firstName, lastName, profilepic, githubHandle } = req.body;
-  let queryText;
-  // conditionals due to default profile. we do not want to replace default profile pic with empty string
-  if (!profilepic) {
-    queryText = `UPDATE Users
-		 SET firstname=${firstName},
-					lastname=${lastName},
-					githubHandle=${githubHandle}
-		 WHERE username=${username}`;
-  } else {
-    queryText = `UPDATE Users
-		SET firstname=${firstName},
-				 lastname=${lastName},
-				 githubHandle=${githubHandle},
-				 profilepic=${profilepic}
-		WHERE username=${username}`;
-  }
+authController.editProfile = async (req, res, next) => {
+  const {
+    username,
+    firstName,
+    lastName,
+    about,
+    profilepic,
+    githubHandle,
+    linkedIn,
+    personalPage,
+  } = req.body;
 
-  model.query(queryText, (err) => {
-    if (err) {
-      console.log(err);
-      return next({
-        log: `error occurred at editProfile middleware. error message is: ${err}`,
-        status: 400,
-        message: { err: 'An error occurred' },
-      });
-    }
+  const queryText = `UPDATE Users
+	SET  firstname=$1,
+			 lastname=$2,
+			 about=$3
+			 profilepic=$4,
+			 githubhandle=$5,
+			 linkedin=$6,
+			 personalpage=$7
+	WHERE username=$8`;
+
+  const queryValue = [
+    firstName,
+    lastName,
+    about,
+    profilepic,
+    githubHandle,
+    linkedIn,
+    personalPage,
+    username,
+  ];
+
+  try {
+    await model.query(queryText, queryValue);
     return next();
-  });
+  } catch (err) {
+    console.log(err);
+    return next({
+      log: `error occurred at getProfile middleware. error message is: ${err}`,
+      status: 400,
+      message: { err: 'An error occurred' },
+    });
+  }
 };
 
 module.exports = authController;
