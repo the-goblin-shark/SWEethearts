@@ -10,7 +10,9 @@ const NavigateBar = () => {
     <Navbar bg="primary" variant="dark">
       {/* Leftside Nav Logo/Link */}
       {/* TODO: Point this href to `/explore` if User is authenticated */}
-      <Navbar.Brand href="/">Scratch Project</Navbar.Brand>
+      <Link to="/">
+        <Navbar.Brand>Scratch Project</Navbar.Brand>
+      </Link>
       {/* Rightside Nav Links */}
       {/* Set class for Login and Signup button Nav item to `margin-left: auto;`*/}
       <Nav className="ml-auto">
