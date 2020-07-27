@@ -20,6 +20,7 @@ const Explore = (props) => {
     },
   ]);
 
+  const [query, setQuery] = useState('');
   const [techList, setTechList] = useState([{ tech_id: '', name: '' }]);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const Explore = (props) => {
       // console.log('results.data', results.data);
       setResponse(results.data[0]);
       setTechList(results.data[1]);
+      console.log(results.data[0]);
     };
 
     fetchData();
@@ -44,7 +46,7 @@ const Explore = (props) => {
             <Form.Check.Input type="checkbox" isValid />
             <Form.Check.Label className="ml-2">
               {' '}
-              <h4 style={{ color: 'lightblue' }}>{tech}</h4>{' '}
+              <h4 style={{ color: '#5e93a5' }}>{tech}</h4>{' '}
             </Form.Check.Label>
           </Form.Check>
         </div>
@@ -52,21 +54,36 @@ const Explore = (props) => {
     );
   });
 
+  const onChange = (q) => {
+    setQuery(q);
+  };
+
   // get Ideas name, description, and images.
   // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
-  let ideas = response;
+  const ideas = response;
+
+  const sortedIdeas = ideas.filter((data) => {
+    return data.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  });
+
   // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
   // Generate an array of box components
-  const generateBoxes = ideas.map((idea, idx) => {
+
+  // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
+  // Generate an array of box components with sortedIdea
+  const generateBoxes = sortedIdeas.map((idea, idx) => {
     return (
       <Card key={idx} style={{ width: '18rem' }} className="m-2">
         <Card.Img variant="top" src={idea.image} />
         <Card.Body>
           <Card.Title>{idea.name}</Card.Title>
-          <Card.Text>{idea.description}</Card.Text>
-          <Card.Text style={{ fontSize: 14, fontStyle: 'italic' }}>
-            <span>Tech Stacks: </span>
-            <br /> {idea.techstacks.join(', ')}
+          <Card.Text style={{ fontWeight: 300 }}>{idea.description}</Card.Text>
+          <Card.Text style={{ fontSize: 12, fontStyle: 'italic' }}>
+            <span style={{ fontSize: 13, fontWeight: 'bold' }}>
+              Tech Stack:{' '}
+            </span>{' '}
+            <br />
+            {idea.techstacks.join(', ')}
           </Card.Text>
           <NavLink
             to={{
@@ -95,6 +112,7 @@ const Explore = (props) => {
           size="lg"
           type="text"
           placeholder="Search your dream..."
+          onChange={(e) => onChange(e.target.value)}
         />
         {/* <Button variant="primary" type="submit" className='mt-2'></Button> */}
       </Form.Group>
@@ -107,7 +125,13 @@ const Explore = (props) => {
         <Col lg={3} className="mt-4">
           <Row noGutters>
             {' '}
-            <h2 className="mb-4"> Choose technology stack </h2>
+            <h4
+              className="mb-4 mt-3"
+              style={{ fontStyle: 'italic', fontWeight: 400 }}
+            >
+              {' '}
+              Filter by technology stack:{' '}
+            </h4>
           </Row>
           <div className="">{generateTech}</div>
         </Col>
