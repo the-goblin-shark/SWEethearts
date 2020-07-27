@@ -3,15 +3,6 @@ import {Container, Col, Row, Form, Card, Button, CardDeck } from 'react-bootstra
 import Spinner from './Spinner'
 
 const Explore = () => {
-  
-  // // making fetch request from the server to get data
-  //   let response = await fetch('/api/login', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-  // {
 
   const [response, setResponse] = useState([{
     idea_id: '',
@@ -35,7 +26,6 @@ const Explore = () => {
     .then((data) => data.json())
     .then((data) => setResponse(data));
   }, [])
-
 
   // get technologies
   const techStack = ['HTML', 'JavaScript', 'Python', 'NodeJS'];
