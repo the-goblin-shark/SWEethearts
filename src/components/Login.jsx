@@ -17,25 +17,19 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { username, password } = loginInputs;
-
     const body = {
       username,
       password,
     };
+    let response = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
 
-    // let response = await fetch('/api/login', {
-    //   method: 'POST',
-    // headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(body),
-    // });
-
-    //TO DO: NEED TO SEE WHAT BACKEND SENDS BACK
-    //PLACEHOLDER FOR NOW
-    let response = 'success';
-
-    if (response === 'success') setLoginStatus(true);
+    if (response.status === 200) setLoginStatus(true);
     else setLoginStatus(false);
   };
 

@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import Spinner from './Spinner';
 import '../styles/ideapage.scss';
 import { Container, Col, Row, Button } from 'react-bootstrap';
 
 const IdeaPage = (props) => {
-  let { ideaID } = props;
+  let { idea_id } = props.location.state;
   const [ideaData, setIdeaData] = useState({});
   const [interested, setInterested] = useState(false);
-  ideaID = 32;
 
   useEffect(() => {
     getIdea();
   }, []);
 
   const getIdea = async () => {
-    const res = await fetch(`/api/explore/${ideaID}`);
+    const res = await fetch(`/api/explore/${idea_id}`);
     const parsed = await res.json();
     setIdeaData(parsed);
   };
@@ -24,8 +24,7 @@ const IdeaPage = (props) => {
     //TODO: actually build out functionality to email/notify creator
   };
 
-  if (!Object.keys(ideaData).length)
-    return <Container id="idea-wrapper">Loading...</Container>;
+  if (!Object.keys(ideaData).length) return <Spinner />;
   else if (ideaData.err)
     return <Container id="idea-wrapper">Could not load idea</Container>;
 
@@ -64,9 +63,13 @@ const IdeaPage = (props) => {
 
           <h4>WHEN</h4>
           <Container>
-            <h6>Start Date: {when_start.substring(0, 10)}</h6>
+            <h6>
+              Start Date: {when_start ? when_start.substring(0, 10) : undefined}
+            </h6>
             {when_end ? (
-              <h6>End Date: {when_end.substring(0, 10)}</h6>
+              <h6>
+                End Date: {when_end ? when_end.substring(0, 10) : undefined}
+              </h6>
             ) : undefined}
           </Container>
 
