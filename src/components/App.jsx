@@ -5,6 +5,7 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import NavigateBar from './NavigateBar';
 import IdeaPage from './IdeaPage';
+import SubmitIdea from './SubmitIdea';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
@@ -24,6 +25,7 @@ const App = () => {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/explore" component={Explore} />
           <Route exact path="/idea" component={IdeaPage} />
+          <Route exact path="/submit" component={SubmitIdea} />
         </Switch>
       </Fragment>
     </Router>
