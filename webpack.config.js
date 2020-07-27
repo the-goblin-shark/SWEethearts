@@ -56,6 +56,7 @@ const config = {
     proxy: {
       '/api': 'http://localhost:3000',
     },
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
