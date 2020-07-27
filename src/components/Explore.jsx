@@ -29,7 +29,7 @@ const Explore = (props) => {
       // console.log('results.data', results.data);
       setResponse(results.data[0]);
       setTechList(results.data[1]);
-      console.log(results.data[0]);
+      // console.log(results.data[0]);
     };
 
     fetchData();
@@ -73,7 +73,7 @@ const Explore = (props) => {
   // Generate an array of box components with sortedIdea
   const generateBoxes = sortedIdeas.map((idea, idx) => {
     return (
-      <Card key={idx} style={{ width: '18rem' }} className="m-2">
+      <Card key={idx} style={{ width: '20rem' }} className="m-3">
         <Card.Img variant="top" src={idea.image} />
         <Card.Body>
           <Card.Title>{idea.name}</Card.Title>
@@ -122,15 +122,15 @@ const Explore = (props) => {
   const explorePage = (
     <Container fluid>
       <Row>
-        <Col lg={3} className="mt-4">
+        <Col lg={2} className="mt-4">
           <Row noGutters>
             {' '}
             <h4
-              className="mb-4 mt-3"
-              style={{ fontStyle: 'italic', fontWeight: 400 }}
+              className="mb-4"
+              style={{ fontStyle: 'italic', fontWeight: 400, marginTop: 130 }}
             >
               {' '}
-              Filter by technology stack:{' '}
+              Choose your tech stack:{' '}
             </h4>
           </Row>
           <div className="">{generateTech}</div>
