@@ -23,6 +23,8 @@ const Explore = (props) => {
 
   const [query, setQuery] = useState('');
   const [techList, setTechList] = useState([{ tech_id: '', name: '' }]);
+  //for sort by tech stack functionality, if user checks off a tech, it gets added to array
+  const [techFilter, setTechFilter] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +38,14 @@ const Explore = (props) => {
     fetchData();
   }, []);
 
+  const handleTechFilter = (e) => {
+    let newTechFilter;
+    if (techFilter.includes(e.target.value)) {
+      newTechFilter = techFilter.filter((tech) => tech !== e.target.value);
+    } else newTechFilter = [...techFilter, e.target.value];
+    setTechFilter(newTechFilter);
+  };
+
   // get technologies
   const techStack = techList.map((tech) => tech.name);
   // Generate checkbox component for each technology
@@ -44,7 +54,12 @@ const Explore = (props) => {
       <Form key={idx}>
         <div key="checkbox" className="mb-2 mt-2 ml-3">
           <Form.Check type="checkbox">
-            <Form.Check.Input type="checkbox" isValid />
+            <Form.Check.Input
+              type="checkbox"
+              isValid
+              value={tech}
+              onClick={handleTechFilter}
+            />
             <Form.Check.Label className="ml-2">
               {' '}
               <h4 style={{ color: '#5e93a5' }}>{tech}</h4>{' '}
@@ -55,24 +70,27 @@ const Explore = (props) => {
     );
   });
 
-  const onChange = (q) => {
-    setQuery(q);
-  };
+  const onChange = (q) => setQuery(q);
 
-  // get Ideas name, description, and images.
-  // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
   const ideas = response;
 
   const sortedIdeas = ideas.filter((data) => {
     return data.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
   });
 
-  // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
-  // Generate an array of box components
+  //check if user wants to filter for tech, otherwise just return sortedIdeas as-is
+  const filteredIdeas = techFilter.length
+    ? sortedIdeas.filter((idea) => {
+        //if idea has tech that is inside techFilter, then include that idea
+        for (let i = 0; i < techFilter.length; i++) {
+          const selectedTech = techFilter[i];
+          if (!idea.techstacks.includes(selectedTech)) return false;
+        }
+        return true;
+      })
+    : sortedIdeas;
 
-  // const ideas = ['idea1', 'idea2', 'idea3', 'idea4', 'idea5', 'idea6', 'idea7'];
-  // Generate an array of box components with sortedIdea
-  const generateBoxes = sortedIdeas.map((idea, idx) => {
+  const generateBoxes = filteredIdeas.map((idea, idx) => {
     return (
       <Card key={idx} style={{ width: '20rem' }} className="m-3">
         <Card.Img variant="top" src={idea.image} />
