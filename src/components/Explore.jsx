@@ -91,7 +91,7 @@ const Explore = (props) => {
               pathname: '/idea',
               state: {
                 idea_id: idea.idea_id,
-                authStaus: 101,
+                authStatus,
               },
             }}
           >
