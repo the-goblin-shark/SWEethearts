@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const SubmitIdea = (props) => {
   const { authStatus } = props;
+  const { username } = authStatus;
 
   const [retrievedTechStacks, setRetrievedTechStacks] = useState([]);
 
@@ -68,6 +69,7 @@ const SubmitIdea = (props) => {
     e.preventDefault();
     // convert tech stack into tech stack id
     const techStackID = techIDConverter(techStack);
+
     const data = {
       name,
       description,
@@ -78,7 +80,7 @@ const SubmitIdea = (props) => {
       teamNumber,
       imageURL,
       // hardcode, need a logic to pass username as prop
-      username: 'Justin',
+      username,
     };
     // console.log('data', data);
     await axios.post('/api/submit', data);
