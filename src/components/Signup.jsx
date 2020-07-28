@@ -21,7 +21,14 @@ const Signup = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password, email, confirmPassword } = registrationInputs;
+    const {
+      username,
+      password,
+      email,
+      confirmPassword,
+      firstname,
+      lastname,
+    } = registrationInputs;
     if (password !== confirmPassword)
       return setErrorMsg(`Passwords don't match!`);
 
@@ -29,6 +36,8 @@ const Signup = (props) => {
       username,
       password,
       email,
+      firstname,
+      lastname,
     };
 
     let response = await fetch('/api/signup', {
@@ -76,7 +85,6 @@ const Signup = (props) => {
             />
           </Form.Group>
 
-          <Form onSubmit={handleSubmit}>
           <Form.Group controlId="firstname">
             <Form.Label>First Name</Form.Label>
             <Form.Control
@@ -87,7 +95,6 @@ const Signup = (props) => {
             />
           </Form.Group>
 
-          <Form onSubmit={handleSubmit}>
           <Form.Group controlId="lastname">
             <Form.Label>Last Name</Form.Label>
             <Form.Control
