@@ -3,6 +3,7 @@ import Landing from './Landing.jsx';
 import Explore from './Explore.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
+import Profile from './Profile.jsx';
 import NavigateBar from './NavigateBar';
 import IdeaPage from './IdeaPage';
 import SubmitIdea from './SubmitIdea';
@@ -54,6 +55,11 @@ const App = () => {
             exact
             path="/submit"
             render={() => <SubmitIdea authStatus={authStatus} />}
+          />
+          <Route
+            exact
+            path="/profile"
+            render={() => <Profile authStatus={authStatus} />}
           />
         </Switch>
       </Fragment>

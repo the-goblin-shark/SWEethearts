@@ -81,7 +81,17 @@ const IdeaPage = (props) => {
             <ul>
               <li className="unstyled-li">
                 {/* TODO:CONVERT THE PROFILE PIC IN SCHEMA TO STRING */}
-                <img className="prof-pic" src={profilepic} />
+                <NavLink
+                  to={{
+                    pathname: '/profile',
+                    state: {
+                      ideaCreator: creator_username,
+                      authStatus
+                    },
+                  }}
+                >
+                  <img className="prof-pic" src={profilepic} />
+                </NavLink>
                 {creator_username} (creator)
               </li>
               {participants.map((user, idx) => (
@@ -118,10 +128,10 @@ const IdeaPage = (props) => {
                   I'm Interested!
                 </Button>
               ) : (
-                <Button disabled variant="info" className="m-2">
-                  Idea Creator Notified!
-                </Button>
-              )}
+                  <Button disabled variant="info" className="m-2">
+                    Idea Creator Notified!
+                  </Button>
+                )}
             </Row>
             <Row className="mx-auto">
               <NavLink to="/explore">

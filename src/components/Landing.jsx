@@ -13,28 +13,30 @@ const redirectToPath = (history, path) => {
 
 const Landing = ({ history }) => {
   return (
-    <Container>
-      <Row>
-        {/* Center landing page text by placing in middle column */}
-        <Col></Col>
-        <Col>
-          <Fragment>Welcome to Scratch Project</Fragment>
-          <br />
-          <Fragment>
-            A place where developers make their dreams come true
-          </Fragment>
-          <br />
-          <Button
-            onClick={() => redirectToPath(history, '/explore')}
-            size="lg"
-            variant="outline-primary"
-            block
-          >
-            Start Exploring
-          </Button>
-        </Col>
-        <Col></Col>
-      </Row>
+    <Container fluid className='container'>
+      <div className="mt-5">
+        <h1 className="d-flex justify-content-center">
+          {" "}
+          Welcome to Scratch Project{" "}
+        </h1>
+        <br />
+        <h2 className="mb-5 d-flex justify-content-center">
+          {" "}
+          A place where developers make their dreams come true{" "}
+        </h2>
+        <br />
+      </div>
+      <div className="mt-5 d-flex justify-content-center">
+        <Button
+          className="w-25"
+          onClick={() => redirectToPath(history, "/explore")}
+          size="lg"
+          variant="outline-primary"
+          block
+        >
+          Start Exploring
+        </Button>
+      </div>
     </Container>
   );
 };
