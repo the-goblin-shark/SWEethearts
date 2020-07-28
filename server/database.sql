@@ -9,10 +9,11 @@ CREATE TABLE public.User_credentials
 CREATE TABLE Users
 (
   user_id serial NOT NULL,
-  firstname varchar(50) NOT NULL,
-  lastname varchar(50) NOT NULL,
+  firstname varchar(50) NULL,
+  lastname varchar(50) NULL,
+  about varchar(255) NULL,
   profilepic varchar(65535) NULL DEFAULT 'https://www.eguardtech.com/wp-content/uploads/2018/08/Network-Profile.png',
-  githubhandle varchar(50) NOT NULL,
+  githubhandle varchar(50) NULL,
   username varchar(50) NOT NULL,
   linkedin varchar(255) NULL,
   personalpage varchar(255) NULL,
