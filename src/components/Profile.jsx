@@ -19,6 +19,7 @@ const Profile = (props) => {
 
   // Accessing Profile from Idea Page?
   if (ideaCreator) {
+    console.log('idea creator is : ', ideaCreator)
     // If logged-in user is _not_ clicking on their own profile picture, 
     // RESET name-to-display to that of the User being clicked by logged-in User
     if (loggedInUsername !== ideaCreator) {

@@ -81,13 +81,13 @@ const Explore = (props) => {
   //check if user wants to filter for tech, otherwise just return sortedIdeas as-is
   const filteredIdeas = techFilter.length
     ? sortedIdeas.filter((idea) => {
-        //if idea has tech that is inside techFilter, then include that idea
-        for (let i = 0; i < techFilter.length; i++) {
-          const selectedTech = techFilter[i];
-          if (!idea.techstacks.includes(selectedTech)) return false;
-        }
-        return true;
-      })
+      //if idea has tech that is inside techFilter, then include that idea
+      for (let i = 0; i < techFilter.length; i++) {
+        const selectedTech = techFilter[i];
+        if (!idea.techstacks.includes(selectedTech)) return false;
+      }
+      return true;
+    })
     : sortedIdeas;
 
   const generateBoxes = filteredIdeas.map((idea, idx) => {
@@ -156,7 +156,7 @@ const Explore = (props) => {
           <div className="">{generateTech}</div>
         </Col>
 
-        <Col lg={9} class="d-flex align-items-center" className="mt-4">
+        <Col lg={9} className="mt-4">
           {searchIdea}
           <Row>{generateBoxes}</Row>
         </Col>
@@ -167,8 +167,8 @@ const Explore = (props) => {
   return response.length === 1 ? (
     <Spinner />
   ) : (
-    <Fragment> {explorePage} </Fragment>
-  );
+      <Fragment> {explorePage} </Fragment>
+    );
 };
 
 export default Explore;
